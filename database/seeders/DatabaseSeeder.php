@@ -2,7 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Poli;
+use App\Models\Dokter;
 use Illuminate\Database\Seeder;
+use Database\Seeders\TestRelasi;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,5 +17,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
+
+        $this->call([TestRelasi::class]);
     }
 }
