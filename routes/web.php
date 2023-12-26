@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DokterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('layouts.header');
-});
+Route::get('/', [DashboardController::class, 'index']);
+Route::get('/home', [DashboardController::class, 'index']);
+
+Route::get('/loginDokter', [DokterController::class, 'halamanLogin']);
+Route::post('/dokterLogin', [DokterController::class, 'login']);
+
+
+Route::get('/loginAdmin', [AdminController::class, 'halamanLogin']);

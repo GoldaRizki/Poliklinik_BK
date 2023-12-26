@@ -29,10 +29,10 @@ class TestRelasi extends Seeder
         ]);
 
         Dokter::create([
-            'nama' => 'dr. Yanto',
+            'nama' => 'yanto',
             'alamat' => 'Truko',
             'no_hp' => '085565454',
-            'password' => '123',
+            'password' => bcrypt('123'),
             'poli_id' => 1
         ]);
 

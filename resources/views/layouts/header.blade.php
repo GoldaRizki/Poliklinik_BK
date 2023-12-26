@@ -14,6 +14,9 @@
 @include('partials/navbar')
 
 
+@yield('isi')
+
+
 <script src="{{ url('/assets/js/bootstrap.bundle.min.js') }}"></script>
 
 </body>

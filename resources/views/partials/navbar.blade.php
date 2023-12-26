@@ -10,6 +10,27 @@
         <a class="nav-link" href="{{ url('/dokter') }}">Dokter</a>
         <a class="nav-link" href="{{ url('/pasien') }}">Pasien</a>
         <a class="nav-link" href="{{ url('/obat') }}">Daftar Obat</a>
+
+      @guest('admin')
+      @guest('dokter')
+      
+        <div class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Login
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{{ url('/loginDokter') }}">Sebagai Dokter</a></li>
+            <li><a class="dropdown-item" href="{{ url('/loginAdmin') }}">Sebagai Admin</a></li>
+          </ul>
+        </div>
+      @endguest
+      @endguest
+
+
+      
+
+
+
       </div>
     </div>
   </div>
