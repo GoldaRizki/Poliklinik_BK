@@ -10,7 +10,10 @@
         <a class="nav-link" href="{{ url('/dokter') }}">Dokter</a>
         <a class="nav-link" href="{{ url('/pasien') }}">Pasien</a>
         <a class="nav-link" href="{{ url('/obat') }}">Daftar Obat</a>
+        <a class="nav-link" href="{{ url('/poli') }}">Poli</a>
 
+
+      <div>
       @guest('admin')
       @guest('dokter')
       
@@ -26,6 +29,19 @@
       @endguest
       @endguest
 
+      @auth('admin')
+      <form action="{{ url('/logoutAdmin') }}" method="post">
+        @csrf
+        <button type="submit" class="nav-link">Logout</button>
+      </form>
+      @endauth
+
+      @auth('dokter')
+      <form action="{{ url('/logoutDokter') }}" method="post">
+        @csrf
+        <button type="submit" class="nav-link">Logout</button>
+      </form>
+      @endauth
 
       
 

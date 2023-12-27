@@ -16,9 +16,8 @@ class Dokter extends Authenticatable
 
     protected $table = 'dokter';
 
-    protected $fillable = [
-        'nama',
-        'password',
+    protected $guarded = [
+        'id'
     ];
 
 

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Obat;
 use App\Models\Poli;
+use App\Models\Admin;
 use App\Models\Dokter;
 use App\Models\Pasien;
 use App\Models\Periksa;
@@ -24,7 +25,7 @@ class TestRelasi extends Seeder
     {
         //
         Poli::create([
-            'nama_poli' => 'poli_gigi',
+            'nama_poli' => 'poli gigi',
             'keterangan' => 'coba aja',
         ]);
 
@@ -75,6 +76,11 @@ class TestRelasi extends Seeder
         DetailPeriksa::create([
             'periksa_id' => 1,
             'obat_id' => 1
+        ]);
+
+        Admin::create([
+            'nama' => 'yanti',
+            'password' => bcrypt('123'),
         ]);
 
     }
