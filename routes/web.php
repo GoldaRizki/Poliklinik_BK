@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DokterController;
 use App\Http\Controllers\ObatController;
+use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PoliController;
 
 /*
@@ -47,3 +48,7 @@ Route::post('/poli/create', [PoliController::class, 'create']);
 Route::get('/poli/edit/{id}', [PoliController::class, 'edit']);
 Route::put('/poli/update/', [PoliController::class, 'update']);
 Route::delete('/poli/delete/{id}', [PoliController::class, 'delete']);
+
+
+Route::get('/daftarpoli', [PasienController::class, 'halamanDaftar']);
+Route::post('/pasien/daftar', [PasienController::class, 'daftar']);

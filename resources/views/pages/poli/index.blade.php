@@ -13,7 +13,7 @@
     </div>
 
     <div class="form-floating">
-      <textarea class="form-control" placeholder="Keterangan" id="floatingTextarea" name="keterangan">{{ old('keterangan', isset($poli->keterangan) ? $poli->keterangan : '') }}</textarea>
+      <textarea class="form-control @error('keterangan') is-invalid @enderror" placeholder="Keterangan" id="floatingTextarea" name="keterangan">{{ old('keterangan', isset($poli->keterangan) ? $poli->keterangan : '') }}</textarea>
       <label for="floatingTextarea">Keterangan</label>
     </div>
 
