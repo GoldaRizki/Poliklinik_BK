@@ -9,6 +9,8 @@
         <a class="nav-link" href="{{ url('/daftarpoli') }}">Daftar Poli</a>
         <a class="nav-link" href="{{ url('/home') }}">Home</a>
         <a class="nav-link" href="{{ url('/dokter') }}">Dokter</a>
+        <a class="nav-link" href="{{ url('/inputJadwal') }}">Input Jadwal</a>
+        <a class="nav-link" href="{{ url('/antrian') }}">Antrian</a>
         <a class="nav-link" href="{{ url('/pasien') }}">Pasien</a>
         <a class="nav-link" href="{{ url('/obat') }}">Daftar Obat</a>
         <a class="nav-link" href="{{ url('/poli') }}">Poli</a>

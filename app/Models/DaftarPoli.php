@@ -14,6 +14,9 @@ class DaftarPoli extends Model
     protected $guarded = ['id'];
     protected $table = 'daftar_poli';
 
+    public function periksa(){
+        return $this->hasOne(periksa::class);
+    }
     public function jadwal_periksa(){
         return $this->belongsTo(JadwalPeriksa::class);
     }
@@ -22,7 +25,4 @@ class DaftarPoli extends Model
         return $this->belongsTo(Pasien::class);
     }
 
-    public function periksa(){
-        return $this->hasMany(Periksa::class);
-    }
 }

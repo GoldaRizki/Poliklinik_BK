@@ -14,12 +14,16 @@ class Periksa extends Model
     protected $guarded = ['id'];
     protected $table = 'periksa';
 
-    public function daftar_poli(){
-        return $this->belongsTo(DaftarPoli::class);
-    }
+
 
     public function detail_periksa(){
         return $this->hasMany(DetailPeriksa::class);
     }
+
+    public function daftar_poli(){
+        return $this->belongsTo(DaftarPoli::class);
+    }
+
+
 
 }

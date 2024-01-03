@@ -16,9 +16,9 @@ class CreatePeriksaTable extends Migration
         Schema::create('periksa', function (Blueprint $table) {
             $table->id();
             $table->foreignId('daftar_poli_id');
-            $table->datetime('tgl_periksa');
-            $table->text('catatan');
-            $table->integer('biaya_periksa');
+            $table->datetime('tgl_periksa')->nullable();
+            $table->text('catatan')->nullable();
+            $table->integer('biaya_periksa')->nullable();
             $table->timestamps();
         });
     }

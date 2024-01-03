@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DaftarPoli;
 use App\Models\Pasien;
+use App\Models\Periksa;
 use Illuminate\Http\Request;
+use App\Models\JadwalPeriksa;
 use Mockery\Generator\StringManipulation\Pass\Pass;
 
 class PasienController extends Controller
@@ -11,7 +14,15 @@ class PasienController extends Controller
     //
 
     public function halamanDaftar(){
-        return view('pages.pasien.daftar');
+
+        $jadwal = JadwalPeriksa::all();
+
+
+
+
+        return view('pages.pasien.daftar', [
+            'jadwal' => $jadwal,
+        ]);
     }
 
     public function daftar(Request $request){
@@ -52,8 +63,11 @@ class PasienController extends Controller
 
         }
 
+        return redirect()->back()->with('pesan', 'Anda berhasil terdaftar!');
 
-        
-    
     }
+
+
+
+    
 }

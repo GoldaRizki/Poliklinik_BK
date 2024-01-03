@@ -16,4 +16,6 @@ class Pasien extends Model
         return $this->hasMany(DaftarPoli::class);
     }
 
+
+
 }

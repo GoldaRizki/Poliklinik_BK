@@ -4,9 +4,12 @@ use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DokterController;
+use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\ObatController;
 use App\Http\Controllers\PasienController;
+use App\Http\Controllers\PeriksaController;
 use App\Http\Controllers\PoliController;
+use App\Models\Periksa;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,3 +55,30 @@ Route::delete('/poli/delete/{id}', [PoliController::class, 'delete']);
 
 Route::get('/daftarpoli', [PasienController::class, 'halamanDaftar']);
 Route::post('/pasien/daftar', [PasienController::class, 'daftar']);
+
+
+
+Route::get('/inputJadwal', [JadwalController::class, 'index']);
+Route::post('/jadwal/create', [JadwalController::class, 'create']);
+Route::get('/jadwal/edit/{id}', [JadwalController::class, 'edit']);
+Route::put('/jadwal/update', [JadwalController::class, 'update']);
+Route::delete('/jadwal/delete/{id}', [JadwalController::class, 'delete']);
+
+
+Route::post('/pasien/poli/daftar', [PeriksaController::class, 'daftarPoli']);
+
+
+Route::get('/antrian', [PeriksaController::class, 'antrian']);
+Route::get('/pasien/periksa/{id}', [PeriksaController::class, 'periksa']);
+Route::post('/pasien/periksa/', [PeriksaController::class, 'mulai_periksa']);
+Route::post('/periksa', [PeriksaController::class, 'data_periksa']);
+Route::post('/periksa/obat/tambah', [PeriksaController::class, 'tambah_obat']);
+Route::delete('/periksa/obat/delete/{id}', [PeriksaController::class, 'hapus_obat']);
+
+
+
+/*
+Route::put('/jadwal/update', function(){
+   ddd('oawkokawkawkawkawowkaoawk'); 
+});
+*/

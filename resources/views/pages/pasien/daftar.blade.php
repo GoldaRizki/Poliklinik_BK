@@ -9,6 +9,13 @@
   </div>
 @endif
 
+@if(session()->has('pesan'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  {{ session('pesan') }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
+
 @error('telah_terdaftar')
 <div class="alert alert-warning alert-dismissible fade show" role="alert">
     Pasien telah terdaftar!!!
@@ -58,7 +65,40 @@
 
     <div class="tab-pane fade" id="form-daftar-poli" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
         
-    <h1>Iki gawe daftar poliklinik</h1>
+
+        
+            <form action="{{ url('/pasien/poli/daftar') }}" method="post">
+              @csrf
+
+          <div class="mb-3">
+              <label for="no_rm_form" class="form-label">Rekam Medis</label>
+              <input type="text" name="no_rm" value="{{ old('no_rm')}}" class="form-control @error('no_rm') is-invalid @enderror" id="no_rm_form" aria-describedby="no_rm">
+          </div>
+
+
+          <div class="mb-3">
+            <label for="jadwal_form" class="form-label">Jadwal Yang tersedia</label>
+          <select class="form-select" aria-label="Pilihan" id="jadwal_form" name="jadwal_periksa_id">
+            <option value="{{ old('jadwal_periksa_id') }}" selected></option>
+            
+            @foreach ($jadwal as $j)
+            <option value="{{ $j->id }}">{{ $j->dokter->poli->nama_poli . ' - ' . $j->dokter->nama . ' - ' . $j->hari . ' - ' . $j->jam_mulai . ' - ' . $j->jam_selesai }}</option>
+            @endforeach
+        
+          </select>
+          </div>
+
+
+          <div class="form-floating">
+            <textarea class="form-control" placeholder="Tulis Keluhan anda disini . . . " id="floatingTextarea2" style="height: 200px" name="keluhan">{{ old('keluhan') }}</textarea>
+            <label for="floatingTextarea2">Keluhan</label>
+          </div>
+
+          <button type="submit" class="mt-4 btn btn-primary">Daftar</button>
+          
+          </form>
+
+
     
     </div>
     

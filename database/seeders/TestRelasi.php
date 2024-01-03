@@ -52,7 +52,6 @@ class TestRelasi extends Seeder
             'no_rm' => 'Wotif-69'
         ]);
 
-
         DaftarPoli::create([
             'pasien_id' => 1,
             'jadwal_periksa_id' => 1,
