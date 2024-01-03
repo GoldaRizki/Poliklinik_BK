@@ -71,6 +71,7 @@ Route::post('/pasien/poli/daftar', [PeriksaController::class, 'daftarPoli']);
 Route::get('/antrian', [PeriksaController::class, 'antrian']);
 Route::get('/pasien/periksa/{id}', [PeriksaController::class, 'periksa']);
 Route::post('/pasien/periksa/', [PeriksaController::class, 'mulai_periksa']);
+Route::delete('/pasien/daftar_poli/batal', [PeriksaController::class, 'batal_periksa']);
 Route::post('/periksa', [PeriksaController::class, 'data_periksa']);
 Route::post('/periksa/obat/tambah', [PeriksaController::class, 'tambah_obat']);
 Route::delete('/periksa/obat/delete/{id}', [PeriksaController::class, 'hapus_obat']);

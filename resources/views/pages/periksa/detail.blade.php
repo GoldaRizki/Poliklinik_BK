@@ -111,6 +111,7 @@
     <thead>
         <th>Daftar</th>
         <th>Diperiksa</th>
+        <th>Obat</th>
     </thead>
     <tbody>
         @foreach ($riwayat as $d)
@@ -119,27 +120,30 @@
                 Keluhan : {{ $d->keluhan }} <br>
                 Pada tanggal : {{ $d->created_at }}
             </td>
-            <td>
-                <table>
-                    @foreach($d->periksa as $p)
-                    {{ ddd($p->get('periksa')); }}
-                    <tr>
-                        <td>
-                            Tanggal Periksa : {{ $p->tgl_periksa }} <br>
-                            Catatan : {{ $p->catatan }}
-                        </td>
-                        <td>
-                            Obat yang diberikan: <br>
-                            <ul>
-                                @foreach ($p->detail_periksa as $dp)
-                                    <li>{{ $dp->obat->nama_obat }}</li>
-                                @endforeach
-                            </ul>
-                        </td>
-                    </tr>
-                    @endforeach
-                </table>
-            </td>
+                @if($d->periksa)    
+                    <td>
+
+                    
+                            Tanggal Periksa : {{ $d->periksa->tgl_periksa }} <br>
+                            Catatan : {{ $d->periksa->catatan }}
+                    </td>
+                    <td>
+                            <table>
+                                    @foreach ($d->periksa->detail_periksa as $dp)
+                                    <tr><td>{{ $dp->obat->nama_obat }}</td></tr>
+                                    @endforeach
+                            </table>
+                    </td>
+                @else
+                    <td>
+                        --- Tidak dilakukan pemeriksaan ---
+                    </td>
+                    <td>
+                        -
+                    </td>
+                @endif
+
+        
 
 
         </tr>

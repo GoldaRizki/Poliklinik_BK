@@ -82,6 +82,16 @@ class PeriksaController extends Controller
         ]);
     }
 
+    public function batal_periksa(Request $request){
+        $data_valid = $request->validate([
+            'id' => 'required|numeric',
+        ]);
+
+        DaftarPoli::destroy($data_valid['id']);
+
+        return redirect()->back();
+    }
+
     public function data_periksa(Request $request){
         
         $data_valid = $request->validate([

@@ -33,13 +33,14 @@
                     @endif
                 </td>
                 <td>
-                    <form action="/pasien/periksa/batal" method="post">
+                    <form action="/pasien/daftar_poli/batal" method="post">
 
+                        @csrf
                         @method('delete')
 
                         <input type="hidden" name="id" value="{{ $j->id }}">
 
-                        <button class="btn btn-danger btn-sm" type="submit">Hapus</button>
+                        <button class="btn btn-danger btn-sm" type="submit">Batal</button>
                     </form>
                 </td>
             </tr>
