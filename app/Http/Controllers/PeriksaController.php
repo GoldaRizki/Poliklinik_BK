@@ -69,12 +69,16 @@ class PeriksaController extends Controller
         
         $periksa = Periksa::with(['daftar_poli.pasien', 'daftar_poli', 'daftar_poli.jadwal_periksa', 'detail_periksa', 'detail_periksa.obat'])->find($id);
 
+        $riwayat = DaftarPoli::with(['periksa', 'periksa.detail_periksa', 'periksa.detail_periksa'])->where('pasien_id', $periksa->daftar_poli->pasien->id)->get();
+
+        //ddd($riwayat);
         $obat = Obat::all();
         
 
         return view('pages.periksa.detail', [
             'periksa' => $periksa,
-            'obat' => $obat
+            'obat' => $obat,
+            'riwayat' => $riwayat,
         ]);
     }
 
@@ -118,5 +122,30 @@ class PeriksaController extends Controller
         DetailPeriksa::destroy($id);
 
         return redirect()->back()->with('pesan', 'Obat berhasil dihapus!');
+    }
+
+    public function biaya_periksa(Request $request){
+        
+        $data_valid = $request->validate([
+            'periksa_id' => 'required|numeric',
+        ]);
+
+        $detail = DetailPeriksa::with('obat')->where('periksa_id', $data_valid['periksa_id'])->get();
+        
+        $biaya_obat = 0;
+
+        foreach ($detail as $d) {
+            $biaya_obat += $d->obat->harga;
+        }
+
+        $biaya_periksa = $biaya_obat + 150000;
+
+        $data_valid['biaya_periksa'] = $biaya_periksa;
+
+        Periksa::find($data_valid['periksa_id'])->update($data_valid);
+
+
+        return redirect()->back()->with('pesan', 'Biaya Pengobatan berhasil dihitung');
+        
     }
 }

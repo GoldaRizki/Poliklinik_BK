@@ -75,6 +75,7 @@ Route::post('/periksa', [PeriksaController::class, 'data_periksa']);
 Route::post('/periksa/obat/tambah', [PeriksaController::class, 'tambah_obat']);
 Route::delete('/periksa/obat/delete/{id}', [PeriksaController::class, 'hapus_obat']);
 
+Route::post('/periksa/biaya', [PeriksaController::class, 'biaya_periksa']);
 
 
 /*

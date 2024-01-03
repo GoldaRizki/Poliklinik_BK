@@ -86,4 +86,67 @@
 </div>
 
 
+<div class="container-fluid my-3">
+
+
+    @if($periksa->biaya_periksa)
+        <h2>Baya Periksa : Rp. {{ $periksa->biaya_periksa }}</h2>
+    @else
+        <h4>Silahkan hitung biaya periksa</h4>
+    @endif
+
+
+    <form action="/periksa/biaya" method="post">
+    
+        @csrf
+        <input type="hidden" name="periksa_id" value="{{ old('periksa_id', isset($periksa->id) ? $periksa->id : '') }}">
+
+        <button class="btn btn-primary btn-sm" type="submit">Hitung biaya periksa</button>
+
+    </form>
+
+</div>
+
+<table class="table table-hover">
+    <thead>
+        <th>Daftar</th>
+        <th>Diperiksa</th>
+    </thead>
+    <tbody>
+        @foreach ($riwayat as $d)
+        <tr>
+            <td>
+                Keluhan : {{ $d->keluhan }} <br>
+                Pada tanggal : {{ $d->created_at }}
+            </td>
+            <td>
+                <table>
+                    @foreach($d->periksa as $p)
+                    {{ ddd($p->get('periksa')); }}
+                    <tr>
+                        <td>
+                            Tanggal Periksa : {{ $p->tgl_periksa }} <br>
+                            Catatan : {{ $p->catatan }}
+                        </td>
+                        <td>
+                            Obat yang diberikan: <br>
+                            <ul>
+                                @foreach ($p->detail_periksa as $dp)
+                                    <li>{{ $dp->obat->nama_obat }}</li>
+                                @endforeach
+                            </ul>
+                        </td>
+                    </tr>
+                    @endforeach
+                </table>
+            </td>
+
+
+        </tr>
+        @endforeach
+    </tbody>
+
+</table>
+
+
 @endsection
