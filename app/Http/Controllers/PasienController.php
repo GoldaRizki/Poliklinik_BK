@@ -68,6 +68,68 @@ class PasienController extends Controller
     }
 
 
+    public function index(){
+        $daftar_pasien = Pasien::all();
+
+        return view('pages.pasien.list', [
+            'daftar_pasien' => $daftar_pasien,
+            'link_form' => '/pasien/create',
+            'method' => 'post'
+        ]);
+    }
+
+    public function create(Request $request){
+        $data_valid = $request->validate([
+            'nama' => 'required',
+            'alamat' => 'required',
+            'no_ktp' => 'required|numeric',
+            'no_hp' => 'required|numeric',
+            'no_rm' => 'required',
+        ]);
+
+
+        Pasien::create($data_valid);
+
+        return redirect()->back()->with('pesan', 'Pasien berhasil ditambahkan!');
+    }
+
+    public function edit($id){
+        $daftar_pasien = Pasien::all();
+
+        $pasien = Pasien::find($id);
+
+        return view('pages.pasien.list', [
+            'pasien' => $pasien,
+            'daftar_pasien' => $daftar_pasien,
+            'link_form' => '/pasien/update',
+            'method' => 'PUT'
+        ]);
+
+    }
+
+    public function update(Request $request){
+        
+        $data_valid = $request->validate([
+            'id' => 'required|numeric',
+            'nama' => 'required',
+            'alamat' => 'required',
+            'no_ktp' => 'required|numeric',
+            'no_hp' => 'required|numeric',
+            'no_rm' => 'required',
+        ]);
+
+
+        Pasien::find($data_valid['id'])->update($data_valid);
+
+        return redirect()->back()->with('pesan', 'Pasien berhasil diedit!');
+    }
 
     
+    public function delete($id){
+        
+        Pasien::destroy($id);
+
+        return redirect()->back()->with('pesan', 'Pasien berhasil Dihapus!');
+    }
+
 }

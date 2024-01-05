@@ -12,10 +12,11 @@
 <body>
     
 @include('partials/navbar')
+<div class="container-lg mt-5">
 
+    @yield('isi')
 
-@yield('isi')
-
+</div>
 
 <script src="{{ url('/assets/js/bootstrap.bundle.min.js') }}"></script>
 
