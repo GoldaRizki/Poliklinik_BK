@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dokter;
-use App\Models\JadwalPeriksa;
 use Illuminate\Http\Request;
+use App\Models\JadwalPeriksa;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class JadwalController extends Controller
 {
@@ -13,7 +14,7 @@ class JadwalController extends Controller
 
     public function index(){
 
-        $dokter_id = 1;
+        $dokter_id = Auth::guard('dokter')->user()->id;
         $jadwal = JadwalPeriksa::with('dokter')->where('dokter_id', $dokter_id)->get();
 
 
@@ -87,6 +88,7 @@ class JadwalController extends Controller
             'jam_selesai' => 'required',
         ]);
 
+
         //ddd(Carbon::parse($data_valid['jam_mulai']));
         $jam_input_mulai = Carbon::parse($data_valid['jam_mulai']);
         $jam_input_selesai = Carbon::parse($data_valid['jam_selesai']);
@@ -95,6 +97,14 @@ class JadwalController extends Controller
         if($jam_input_mulai->greaterThanOrEqualTo($jam_input_selesai)){
             return redirect()->back()->withErrors(['input_tidak_valid' => 'Input tidak valid! Pastikan inputan benar!'])->withInput();
         }
+
+
+        $hari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+
+        if($data_valid['hari'] == $hari[now(7)->dayOfWeek]){
+            return redirect()->back()->withErrors(['jadwal_tabrakan' => 'jadwal sudah tidak bisa diubah pada hari H!'])->withInput();
+        }
+
 
         $jadwal = JadwalPeriksa::with(['dokter'])->whereRelation('dokter', 'poli_id', $dokter->poli_id)->where('hari', $data_valid['hari'])->where('id', '!=' , $data_valid['id'])->get();
     

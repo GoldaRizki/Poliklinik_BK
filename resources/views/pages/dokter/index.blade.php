@@ -2,7 +2,7 @@
 
 
 @section('isi')
-    <h4>Nama Dokter</h4>
+    <h4>Data Dokter</h4>
 <form class="m-5" action="{{ url($link_form) }}" method="POST">
   @csrf
   @method($method)

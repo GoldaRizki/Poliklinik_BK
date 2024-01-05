@@ -81,6 +81,14 @@ class DokterController extends Controller
     }
 
 
+    public function akun(){
+        $dokter = Auth::guard('dokter')->user();
+
+        return view('pages.dokter.profile', [
+            'dokter' => $dokter,
+        ]);
+    }
+
     public function create(Request $request){
         $data_valid = $request->validate([
             'nama' => 'required',
@@ -122,6 +130,46 @@ class DokterController extends Controller
         Dokter::destroy($id);
 
         return redirect(url('/dokter'));
+    }
+
+    public function ganti_info(Request $request){
+        
+        $data_valid = $request->validate([
+            'id' => 'required|numeric',
+            'nama' => 'required',
+            'alamat' => 'required',
+            'no_hp' => 'required|numeric',
+        ]);
+
+
+        Dokter::find($data_valid['id'])->update($data_valid);
+
+        return redirect()->back();
+
+    }
+
+    public function ganti_password(Request $request){
+        
+        $data_lama = $request->validate([
+            'id' => 'required|numeric',
+            'password' => 'required',
+        ]);
+
+
+        if(Auth::guard('dokter')->attempt($data_lama)){
+            $data_baru = $request->validate([
+                'password_baru' => 'required',
+            ]);
+
+            $data_lama['password'] = bcrypt($data_baru['password_baru']);
+
+            Dokter::find($data_lama['id'])->update($data_lama);
+
+            return redirect()->back();
+        }else{
+            return redirect()->back()->withErrors(['password' => 'Password anda salah!']);
+        }
+
     }
 
 }

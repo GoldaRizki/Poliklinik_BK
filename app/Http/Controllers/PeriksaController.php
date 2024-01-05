@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\DetailPeriksa;
 use App\Models\JadwalPeriksa;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class PeriksaController extends Controller
 {
@@ -41,7 +42,7 @@ class PeriksaController extends Controller
     public function antrian(){
         
         $hari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
-        $dokter_id = 1;
+        $dokter_id = Auth::guard('dokter')->user()->id;
         
         $jadwal = JadwalPeriksa::with(['daftar_poli', 'daftar_poli.pasien', 'daftar_poli.periksa'])->where('hari', $hari[now()->dayOfWeek])->where('dokter_id', $dokter_id)->get();
 
@@ -59,9 +60,9 @@ class PeriksaController extends Controller
             'daftar_poli_id' => 'required|numeric',
         ]);
 
-        Periksa::create($data_valid);
+        $periksa = Periksa::create($data_valid);
 
-        return redirect(url('/pasien/periksa/'. $data_valid['daftar_poli_id']));
+        return redirect(url('/pasien/periksa/'. $periksa->id));
     }
 
 

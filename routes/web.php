@@ -23,7 +23,7 @@ use App\Models\Periksa;
 */
 
 Route::get('/', [DashboardController::class, 'index']);
-Route::get('/home', [DashboardController::class, 'index']);
+Route::get('/home', [DashboardController::class, 'index'])->name('home');
 
 Route::get('/loginDokter', [DokterController::class, 'halamanLogin'])->middleware('guest:dokter');
 Route::post('/dokterLogin', [DokterController::class, 'login'])->middleware('guest:dokter');
@@ -46,6 +46,8 @@ Route::get('/dokter/edit/{id}', [DokterController::class, 'edit'])->middleware('
 Route::put('/dokter/update/', [DokterController::class, 'update'])->middleware('auth:admin');
 Route::delete('/dokter/delete/{id}', [DokterController::class, 'delete'])->middleware('auth:admin');
 
+
+
 Route::get('/poli', [PoliController::class, 'index'])->middleware('auth:admin');
 Route::post('/poli/create', [PoliController::class, 'create'])->middleware('auth:admin');
 Route::get('/poli/edit/{id}', [PoliController::class, 'edit'])->middleware('auth:admin');
@@ -63,6 +65,11 @@ Route::put('/pasien/update', [PasienController::class, 'update'])->middleware('a
 Route::delete('/pasien/delete/{id}', [PasienController::class, 'delete'])->middleware('auth:admin');
 
 
+
+
+Route::get('/dokter/akun', [DokterController::class, 'akun'])->middleware('auth:dokter');
+Route::put('/dokter/profile/edit/', [DokterController::class, 'ganti_info'])->middleware('auth:dokter');
+Route::put('/dokter/password/edit/', [DokterController::class, 'ganti_password'])->middleware('auth:dokter');
 
 
 Route::get('/inputJadwal', [JadwalController::class, 'index'])->middleware('auth:dokter');

@@ -28,6 +28,10 @@
         <li class="nav-item">  
         <a class="nav-link" href="{{ url('/antrian') }}">Antrian</a>
         </li>
+
+        <li class="nav-item">  
+          <a class="nav-link" href="{{ url('/dokter/akun') }}">Akun</a>
+          </li>
         @endauth
     
       @auth('admin')
