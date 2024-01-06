@@ -19,6 +19,7 @@ class CreateJadwalPeriksaTable extends Migration
             $table->enum('hari', ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu']);
             $table->time('jam_mulai');
             $table->time('jam_selesai');
+            $table->char('Aktif', 1);
             $table->timestamps();
         });
     }

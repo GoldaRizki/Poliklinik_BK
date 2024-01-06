@@ -57,6 +57,7 @@ class JadwalController extends Controller
             }
         }
 
+        $data_valid['Aktif'] = 'Y';
 
         JadwalPeriksa::create($data_valid);
 
@@ -134,4 +135,16 @@ class JadwalController extends Controller
     }
 
 
+    public function jadwal_aktif($id){
+        
+        $jadwal = JadwalPeriksa::find($id);
+
+        if($jadwal->Aktif == 'Y'){
+            $jadwal->update(['Aktif' => 'N']);
+        }elseif($jadwal->Aktif == 'N') {
+            $jadwal->update(['Aktif' => 'Y']);
+        }
+
+        return redirect()->back();
+    }
 }

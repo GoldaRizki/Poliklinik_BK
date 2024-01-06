@@ -42,6 +42,7 @@ class TestRelasi extends Seeder
             'hari' => 'Selasa',
             'jam_mulai' => Carbon::parse('15:00', 7),
             'jam_selesai' => Carbon::parse('17:00', 7),
+            'Aktif' => 'Y',
         ]);
 
         Pasien::create([

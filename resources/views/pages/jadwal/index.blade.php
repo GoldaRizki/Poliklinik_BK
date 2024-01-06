@@ -22,7 +22,7 @@
   @csrf
   @method($method)
   <input type="hidden" name="id" value="{{ old('id', isset($jadwalPeriksa->id) ? $jadwalPeriksa->id : '') }}">
-  <input type="hidden" name="dokter_id" value="1">
+  <input type="hidden" name="dokter_id" value="{{ Auth::guard('dokter')->user()->id }}">
   
   <select class="form-select @error('hari') is-invalid @enderror" aria-label="Hari" name="hari">
     <option value="{{ old('hari', isset($jadwalPeriksa->hari) ? $jadwalPeriksa->hari : '') }}" selected>{{ old('hari', isset($jadwalPeriksa->hari) ? $jadwalPeriksa->hari : '  ----Pilih Hari----  ') }}</option>
@@ -59,8 +59,9 @@
       <th>Dokter</th>
       <th>Hari</th>
       <th>Jam Mulai</th>
-      <th>Jan Selesai</th>
-      <th class="text-center" colspan="2">Aksi</th>
+      <th>Jam Selesai</th>
+      <th>Status</th>
+      <th class="text-center" colspan="3">Aksi</th>
     </tr>
   </thead>
 
@@ -72,6 +73,29 @@
         <td>{{ $j->hari }}</td>
         <td>{{ $j->jam_mulai }}</td>
         <td>{{ $j->jam_selesai }}</td>
+        <td>
+          @if($j->Aktif == 'Y')
+            Aktif
+          @else
+            Tidak Aktif
+          @endif
+        </td>
+        <td>
+            <form action="{{ url('/jadwal/toggle_aktif/' . $j->id) }}" method="post">
+              @method('PUT')
+              @csrf
+                  @if($j->Aktif == 'Y')
+                  <button type="submit" class="btn btn-sm btn-primary">
+                    Non Aktifkan
+                  </button>
+                  @else
+                  <button type="submit" class="btn btn-sm btn-success">
+                      Aktifkan
+                  </button>
+                  @endif
+              </button>
+            </form>
+        </td>
         <td><a href="{{ url('/jadwal/edit/' . $j->id) }}" class="btn btn-sm btn-warning">Edit</a></td>
         <td>
             <form action="{{ url('/jadwal/delete/' . $j->id) }}" method="post">

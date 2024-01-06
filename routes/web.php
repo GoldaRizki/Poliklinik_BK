@@ -77,7 +77,7 @@ Route::post('/jadwal/create', [JadwalController::class, 'create'])->middleware('
 Route::get('/jadwal/edit/{id}', [JadwalController::class, 'edit'])->middleware('auth:dokter');
 Route::put('/jadwal/update', [JadwalController::class, 'update'])->middleware('auth:dokter');
 Route::delete('/jadwal/delete/{id}', [JadwalController::class, 'delete'])->middleware('auth:dokter');
-
+Route::put('/jadwal/toggle_aktif/{id}', [JadwalController::class, 'jadwal_aktif'])->middleware('auth:dokter');
 
 Route::post('/pasien/poli/daftar', [PeriksaController::class, 'daftarPoli']); // iki gawe pasien, ojo dikei middleware
 

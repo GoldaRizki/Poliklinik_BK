@@ -15,9 +15,7 @@ class PasienController extends Controller
 
     public function halamanDaftar(){
 
-        $jadwal = JadwalPeriksa::all();
-
-
+        $jadwal = JadwalPeriksa::where('Aktif', 'Y')->get();
 
 
         return view('pages.pasien.daftar', [
